@@ -1,0 +1,21 @@
+{
+    "name": "coflnet/api",
+    "type": "sprinkle",
+    "description": "Api module for UserFrosting.",
+    "license" : "",
+    "authors" : [
+        {
+            "name": "Äkwav",
+            "homepage": "https://coflnet.com/ekwav"
+        }
+    ],
+    "version": "0.0.1",
+    "require": {
+       "league/oauth2-server": "^5.1"
+	},
+    "autoload": {
+        "psr-4": {
+            "UserFrosting\\Sprinkle\\Api\\": "src/"
+        }
+    }
+}
