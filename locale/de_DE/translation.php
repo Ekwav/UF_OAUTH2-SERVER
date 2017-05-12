@@ -53,8 +53,34 @@ return array(
 				"@TRANSLATION" => "E-mail",
 				"DESCRIPTION" => "Die E-mail deines Accounts."
 			],
+		],
+		"CLIENT" => [
+			"NEW" => [
+				"@TRANSLATION" => "Neue App",
+				"DESCRIPTION" => "Hier kannst du eine neue Anwendung hinzufügen."
+			],
+			"ICON" => [
+				"@TRANSLATION" => "Produktlogo-URL",
+				"EXAMPLE" => "https://example.com/mylogo.png",
+				"HELP" => "Dieses Bild wird auf der Autentifizierungsseite angezeigt."
+			],
+			"REDIRECT_URI" => [
+				"@TRANSLATION" => "Weiterleitungs-URI",
+				"EXAMPLE" => "https://example.com/oauth2callback",
+				"HELP" => "Nach dem aktzeptieren der Berechtigungen wird der Nutzer zu diesem Link weitergeleitet."
+			],
+			"DESCRIPTION" => [
+				"@TRANSLATION" => "Produktbeschreibung",
+				"EXAMPLE" => "This App is about ... ",
+				"HELP" => "Wenn der Nutzer auf der Autentifizierungsseite auf info Klickt, wird ihm dieser Text angezeigt."
+			],
+			"NAME" => [
+				"@TRANSLATION" => "Produktname",
+				"EXAMPLE" => "Die Beste App der Welt",
+				"HELP" => "Dieser Name wird überall angezeigt, wo Ihr Produkt genannt wird angezeigt. zB. Autentifizierungsseite & Weiterempfehlungen"
+			]
 		]
-	]
+	],
 );
 
 ?>

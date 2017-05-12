@@ -26,17 +26,19 @@
 		  {% endfor %}
 		  <input type="hidden" value="{%for scope in scopes%}{{scope.slug}} {%endfor%} " name="scope" >
 			<div class="col-md-8 col-md-offset-1">
-				<div class="col-md-3">	 
+				<div class="col-md-3 help-block">	 
 					<button type="submit" name="DENY" class="btn btn-default center-block">{{translate('OAUTH2.PROCESS.DENY')}}</button>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 help-block">
 					<button type="submit" name="EDIT" class="btn btn-info center-block">{{translate('OAUTH2.PROCESS.EDIT')}}</button>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 help-block">
 					<button type="submit" name="AUTHORIZE" class="btn btn-success center-block">{{translate('OAUTH2.PROCESS.AUTHORIZE')}}</button>
 				</div>
 				</div>
         </form>
 	  </div>
 	</div>
+	<div class="help-block"></div>
+	<div class="p-3 pull-right"> Powered by <a href="https://coflnet.com">Coflnet</div>
 {% endblock %}

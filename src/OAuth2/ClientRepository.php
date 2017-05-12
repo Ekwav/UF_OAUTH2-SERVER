@@ -23,7 +23,7 @@ class ClientRepository implements ClientRepositoryInterface
     {
         $clients = [
             $this->clients->public_id => [
-                'secret'          => 'abc123',//password_hash('abc123', PASSWORD_BCRYPT),
+                'secret'          => $this->clients->secret,// we normally don't need this, because the user will vertify himself
                 'name'            => $this->clients-name,
                 'redirect_uri'    => $this->clients->redirect,
                 'is_confidential' => true,
