@@ -8,7 +8,6 @@ $app->get('/oauth', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:auth
 $app->get('/finish_authorize', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:finish_authorize')->add('authGuard');
 
 
-
 //$app->get('/oauth2/change', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:oAuth2ChangeRequest');
 $app->get('/apps', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:renderClients')->add('authGuard');
 $app->get('/app/new', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:renderAddNewClient')->add('authGuard');

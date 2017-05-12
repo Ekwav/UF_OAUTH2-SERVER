@@ -24,9 +24,9 @@ You can now create `Clients` aka Applications.
 1.Open `YourDomain/apps` and continue there.
 
 ## It looks like this
-![screenshot1](https://github.com/Ekwav/UF_OAUTH2-SERVER/tree/develop/screenshots/authorization_page.PNG)
-![screenshot2](https://github.com/Ekwav/UF_OAUTH2-SERVER/tree/develop/screenshots/authorization_page_mobile.PNG)
-![screenshot1](https://github.com/Ekwav/UF_OAUTH2-SERVER/tree/develop/screenshots/manage_apps.PNG)
+![screenshot1](https://raw.githubusercontent.com/Ekwav/UF_OAUTH2-SERVER/master/screenshots/authorization_page.PNG)
+![screenshot2](https://raw.githubusercontent.com/Ekwav/UF_OAUTH2-SERVER/master/screenshots/authorization_page_moblie.PNG)
+![screenshot1](https://raw.githubusercontent.com/Ekwav/UF_OAUTH2-SERVER/master/screenshots/manage_apps.PNG)
 
 
 ## Important things to know
@@ -41,6 +41,7 @@ $csrfBlacklist = [
     $container->config['assets.raw.path'],
 	"/api/userinfo",
 	"/api/anotherEndpoint"
-];```
+];
+```
 
 Don't remove the `Powered by Coflnet` from the authorization page, it has to stay visable. You can modify everything else to fit your needs.
