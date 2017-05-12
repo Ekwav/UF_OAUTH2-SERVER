@@ -1,14 +1,15 @@
 <?php
+/**
+ * UserFrosting OAuth2-server (https://github.com/Ekwav/UF_OAUTH2-SERVER)
+ *
+ * @link      https://github.com/Ekwav/UF_OAUTH2-SERVER
+ * @copyright Copyright (c) 2017 Ekwav (Coflnet)
+ * @license   -ask me if you want to distribute my code, only thing that you are not allowed to chang is the Powered by Coflnet :)
+ */
 namespace UserFrosting\Sprinkle\Api\Controller;
 
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
-use League\OAuth2\Server\AuthorizationServer;
-use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Exception\OAuthServerException;
-use UserFrosting\Sprinkle\Api\OAuth2\UserEntity;
-use UserFrosting\Sprinkle\Api\OAuth2\AccessTokenRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\ClientRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\ScopeRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use UserFrosting\Sprinkle\Api\OAuth2\RefreshTokenRepository;
@@ -16,12 +17,10 @@ use UserFrosting\Sprinkle\Api\OAuth2\UserRepository;
 use UserFrosting\Sprinkle\Core\Facades\Debug; 
 use UserFrosting\Sprinkle\Api\Model\Scopes;
 use UserFrosting\Sprinkle\Api\Model\OauthClients;
-
 use UserFrosting\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
-
 use UserFrosting\Sprinkle\Account\Model\User;
 
 class ApiAuthController extends SimpleController
@@ -29,19 +28,19 @@ class ApiAuthController extends SimpleController
     public function finish_authorize($request, $response, $args)
 	{
 		$server = $this->ci->OAuth2;
-		 try {
-			 $authRequest = $_SESSION["auth_Request"];
+		try {
+			 $authRequest = $_SESSION["auth_request"];
 		// Return the HTTP redirect response
-         return $server->completeAuthorizationRequest($authRequest, $response); 
+        return $server->completeAuthorizationRequest($authRequest, $response); 
 		} 
 		catch (OAuthServerException $exception) {
 			return $exception->generateHttpResponse($response);
 		} catch (\Exception $exception) {
-            // Catch unexpected exceptions
-            $body = $response->getBody();
-            $body->write($exception->getMessage());
-            return $response->withStatus(500)->withBody($body);
-        }
+			// Catch unexpected exceptions
+			$body = $response->getBody();
+			$body->write($exception->getMessage());
+			return $response->withStatus(500)->withBody($body);
+		}
 	}
 		
     
@@ -137,7 +136,7 @@ class ApiAuthController extends SimpleController
 		
 		
 		// nothing went wrong yet? Let's create the actuall OAuth2 object request and store it in the Session
-		$session['auth_Request'] = $this->ci->OAuth2->validateAuthorizationRequest($request);
+		$session['auth_request'] = $this->ci->OAuth2->validateAuthorizationRequest($request);
 		
 		// Now we only need the approval from the user
 		return $view->render($response, 'pages/oauth2_review_details.html.twig', [ 
@@ -149,13 +148,13 @@ class ApiAuthController extends SimpleController
 	public function validateAuthRequest($request, $response, $args)
 	{
 		// The user submited the form, now we can tell the authorization middleware what user it is.
-        $this->ci->session['auth_Request']->setUser(new UserEntity($this->ci->currentUser->id)); 
+		$this->ci->session['auth_request']->setUser(new UserEntity($this->ci->currentUser->id)); 
 		
 		// Select an option based on what the user choose
 		if(isset($_POST['AUTHORIZE']))
 		{
-			$this->ci->session['auth_Request']->setAuthorizationApproved(true);
-        }
+			$this->ci->session['auth_request']->setAuthorizationApproved(true);
+		}
 		elseif(isset($_POST['EDIT']))
 		{
 			//The user wants to change something, show him the edit page
@@ -167,7 +166,7 @@ class ApiAuthController extends SimpleController
 		}
 		else
 		{
-			$this->ci->session['auth_Request']->setAuthorizationApproved(false);
+			$this->ci->session['auth_request']->setAuthorizationApproved(false);
 		}
 		
 		
@@ -178,34 +177,6 @@ class ApiAuthController extends SimpleController
 		$route = $this->ci->config['site.uri.public'] . "/finish_authorize?response_type=" . $params['response_type'] . "&scope=" . $params['scope'] . "&client_id=" . $params['client_id'];
 		
 		return $response->withRedirect($route);
-	}
-	
-	// This function could be used to Change the Authorization Request thrue ajax (not implemented yet)
-//	public function oAuth2ChangeRequest($request, $response, $args)
-//	{
-//		$this->ci->session['auth_Request'] = $this->ci->OAuth2->validateAuthorizationRequest($request);
-//		return $response->withJson($this->ci->session['auth_Request']);
-//	}
-	
-	// Used to manually create new scopes
-	public function createNewScope($request, $response, $args)
-	{
-		$data = $request->getQueryParams();
-		
-		//make sure scope doesn´t exist yet
-		if (Scopes::where('slug', '=', $data['slug'])->exists())
-		{
-			return $response->withJson("scope_exists");
-		}
-		else{
-		$scopes = new Scopes([
-			'slug' => $data['slug'],
-			'name' => $data['name'],
-			'description' => $data['description'],
-		]);
-		$scopes->save();
-		}
-		return $response->withJson("success");
 	}
 	
 	
@@ -284,7 +255,9 @@ class ApiAuthController extends SimpleController
 				$this->public_id = mt_rand(10000000, 99999999) . mt_rand(10000000, 99999999);
 				$this->public_id->exist = OauthClients::where('public_id', '=' , $this->public_id)->first();
 				if($this->public_id->exist = null)
-				{ break; }
+				{ 
+					break; 
+				}
 			}
 		}
 
