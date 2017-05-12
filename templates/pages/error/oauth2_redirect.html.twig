@@ -1,0 +1,15 @@
+{% extends "layouts/error.html.twig" %}
+
+{% block page_title %}{{ translate('OAUTH2.ERROR.TITLE') }}{% endblock %}
+
+{% block page_description %}}{% endblock %}
+
+{% block headline %}<h2 class="headline text-yellow">500</h2>{% endblock %}
+
+{% block heading %}<i class="fa fa-warning text-yellow"></i> {{ translate('OAUTH2.ERROR') }}{% endblock %}
+
+{% block content %}
+    <p>
+        {{ message }}
+    </p>
+{% endblock %}

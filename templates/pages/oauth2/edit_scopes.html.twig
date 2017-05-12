@@ -1,0 +1,17 @@
+{% extends "layouts/dashboard.html.twig" %}
+{% block stylesheets_page %}
+    <!-- Page-specific CSS asset bundle -->
+    {{ assets.css('css/form-widgets') | raw }}
+{% endblock %}
+
+{# Overrides blocks in head of base template #}
+{% block page_title %} {{translate('OAUTH2_CHANGE')}} {% endblock %}
+
+{% block page_description %}{% endblock %}
+{% block body_matter %}
+<div class="form-alerts" id="alerts-page"></div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{
+    "bundle": {
+        "css/oauth2": {
+            "styles" : [
+                "local/api/bootstrap-toggle-master/css/bootstrap-toggle.min.css"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "styles": "plain"
+                    }
+                }
+            }
+        },
+		"js/oauth2": {
+            "scripts" : [
+                "local/api/js/oauth2-edit.js",
+                "local/api/bootstrap-toggle-master/js/bootstrap-toggle.min.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        }
+    }
+}

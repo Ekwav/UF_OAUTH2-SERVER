@@ -1,0 +1,48 @@
+{% extends "layouts/default.html.twig" %}
+
+
+{% block stylesheets_page %}
+    <!-- Page-specific CSS asset bundle -->
+    {{ assets.css('css/form-widgets') | raw }}
+	{{ assets.css('css/oauth2') | raw }}
+{% endblock %}
+
+{# Overrides blocks in head of base template #}
+{% block page_title %} {{translate('OAUTH2.PROCESS.EDIT')}} {% endblock %}
+
+{% block page_description %}{% endblock %}
+
+{% block body_matter %}
+
+<div class="form-alerts" id="alerts-page"></div>
+  <form action="{{site.uri.public}}/oauth" method="get">
+		<div class="col-md-9  col-md-offset-1">
+		<table class="table table-striped">
+          <tbody>
+     
+		{% for scope in scopes %}
+		<tr>
+            <td><h5>{{scope.name}}</h5>
+			<p> {{scope.description}} </p></td>
+            <td><input type="checkbox" data-toggle="toggle" checked data-on="{{translate('OAUTH2.PROCESS.ALLOWED')}}" data-off="{{translate('OAUTH2.PROCESS.DENIED')}}" onChange="updatescopes('{{scope.slug}}')"></td>
+           </tr>
+		
+		  {% endfor %}
+         </tbody>
+		</table>  
+            <input type="hidden" class="form-control"  value="{%for scope in scopes%}{{scope.slug}} {%endfor%}" name="scope" id="scope">
+            <input type="hidden" class="form-control" value="{{app.public_id}}" name="client_id">
+			<input type="hidden" class="form-control" value="{{type}}" name="response_type">
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary ">{{translate('SAVE')}}</button>
+            </div>
+          </div>
+         </div>
+  </form>
+
+{% endblock %}
+
+    {# Override this block in a child layout template or page template to specify or override page-level scripts. #}
+    {% block scripts_page %}
+	{{ assets.js('js/oauth2')| raw }}
+    {% endblock %}

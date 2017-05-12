@@ -1,0 +1,44 @@
+{% extends "layouts/default.html.twig" %}
+
+
+{% block stylesheets_page %}
+    <!-- Page-specific CSS asset bundle -->
+    {{ assets.css('css/form-widgets') | raw }}
+{% endblock %}
+
+{# Overrides blocks in head of base template #}
+{% block page_title %} {{translate('OAUTH2.PROCESS.AUTHORIZE')}} {% endblock %}
+
+{% block page_description %}{% endblock %}
+
+{% block body_matter %}
+<div class="form-alerts" id="alerts-page"></div>
+	<div class="clearfix ">
+	  <img src="{{app.icon_url}}" height="100" width="100" class="img-responsive center-block"></img>
+	  <div class="col-md-offset-3">
+		<h3 class="text.center"> {{translate('OAUTH2.PROCESS.INFORMATION', {app: app.name})}} </h3>
+        <form action="{{site.uri.public}}/authorize_vertify" method="post" class="center-block">
+          {% include "components/csrf.html.twig" %}
+		{% for scope in scopes %}
+		<p><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="{{scope.description}} ">
+			{{scope.name}}
+		</button></p>
+		  {% endfor %}
+		  <input type="hidden" value="{%for scope in scopes%}{{scope.slug}} {%endfor%} " name="scope" >
+			<div class="col-md-8 col-md-offset-1">
+				<div class="col-md-3 help-block">	 
+					<button type="submit" name="DENY" class="btn btn-default center-block">{{translate('OAUTH2.PROCESS.DENY')}}</button>
+				</div>
+				<div class="col-md-3 help-block">
+					<button type="submit" name="EDIT" class="btn btn-info center-block">{{translate('OAUTH2.PROCESS.EDIT')}}</button>
+				</div>
+				<div class="col-md-3 help-block">
+					<button type="submit" name="AUTHORIZE" class="btn btn-success center-block">{{translate('OAUTH2.PROCESS.AUTHORIZE')}}</button>
+				</div>
+				</div>
+        </form>
+	  </div>
+	</div>
+	<div class="help-block"></div>
+	<div class="p-3 pull-right"> Powered by <a href="https://coflnet.com">Coflnet</div>
+{% endblock %}

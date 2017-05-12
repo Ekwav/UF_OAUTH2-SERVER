@@ -1,0 +1,24 @@
+{
+	"scopes" : {
+		"transformations" : [
+			"purge"
+		]
+        "validators" : {
+            "required" : {
+                "label" : "Scopes",
+                "message" : "You need atleast one scope."
+            }
+		}
+	},
+	"client_id" : {
+		"transformations" : [
+			"purge"
+		]
+        "validators" : {
+            "required" : {
+                "label" : "AppID",
+                "message" : "You need an AppID to grant access to."
+            }
+		}
+	}
+}

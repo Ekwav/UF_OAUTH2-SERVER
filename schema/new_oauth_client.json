@@ -1,0 +1,56 @@
+{
+	"name" : {
+		"transformations" : [
+			"purge"
+		],
+        "validators" : {
+            "required" : {
+                "label" : "Name",
+                "message" : "Your App needs a name"
+            },
+			"length" : {
+            "min" : 5,
+            "max" : 40,
+            "message" : "Your name must be between {{min}} and {{max}} characters long."
+        }
+		}
+	},
+	"description" : {
+		"transformations" : [
+			"purge"
+		],
+        "validators" : {
+            "required" : {
+                "label" : "Description",
+                "message" : "You need a description."
+            }
+		}
+	},
+	"icon" : {
+		"transformations" : [
+			"purge"
+		],
+        "validators" : {
+            "required" : {
+                "label" : "Icon",
+                "message" : "You need an Icon."
+            },
+			"length" : {
+            "min" : 5,
+            "max" : 1000,
+            "message" : "Your name must be between {{min}} and {{max}} characters long."
+			}
+		}
+	},
+	"redirect" : {
+		"transformations" : [
+			"purge"
+		],
+        "validators" : {
+            "required" : {
+                "label" : "Redirect",
+                "message" : "You need a redirect url."
+            }
+		}
+	}
+}
