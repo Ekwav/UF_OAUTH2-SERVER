@@ -1,4 +1,4 @@
-{% extends "layouts/default.html.twig" %}
+{% extends "pages/abstract/default.html.twig" %}
 
 
 {% block stylesheets_page %}
@@ -18,7 +18,7 @@
 	  <div class="col-md-offset-3">
 		<h3 class="text.center"> {{translate('OAUTH2.PROCESS.INFORMATION', {app: app.name})}} </h3>
         <form action="{{site.uri.public}}/authorize_vertify" method="post" class="center-block">
-          {% include "components/csrf.html.twig" %}
+          {% include "forms/csrf.html.twig" %}
 		{% for scope in scopes %}
 		<p><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="{{scope.description}} ">
 			{{scope.name}}
@@ -26,7 +26,7 @@
 		  {% endfor %}
 		  <input type="hidden" value="{%for scope in scopes%}{{scope.slug}} {%endfor%} " name="scope" >
 			<div class="col-md-8 col-md-offset-1">
-				<div class="col-md-3 help-block">	 
+				<div class="col-md-3 help-block">
 					<button type="submit" name="DENY" class="btn btn-default center-block">{{translate('OAUTH2.PROCESS.DENY')}}</button>
 				</div>
 				<div class="col-md-3 help-block">

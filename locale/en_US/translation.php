@@ -10,10 +10,10 @@ return array(
 			"ALLOWED" => "Allowed",
 			"DENIED" => "Denied"
 		],
-		
+
 		"PERMISSION" => "Permission",
-		
-		
+
+
 		"ERROR" => [
 			"@TRANSLATION" => "Something went wrong.",
 			"TITLE" => "Authetificationerror",
@@ -23,7 +23,7 @@ return array(
 			"NO_CLIENT" => "No AppID. Please provide us with a 'client_id'.",
 			"REDIRECT" => "Klick <a href='{{redirect}}'>here</a> to get back to the App."
 		],
-		
+
 		"SCOPE" => [
 			"EMAIL" => [
 				"@TRANSLATION" => "E-mail",
@@ -48,6 +48,32 @@ return array(
 			"BASIC" => [
 				"@TRANSLATION" => "Basic",
 				"DESCRIPTION" => "Gives acces to your userID, username and CloudSave."
+			]
+		],
+		"CLIENT" => [
+			"NEW" => [
+				"@TRANSLATION" => "New App",
+				"DESCRIPTION" => "Here you can add a new app."
+			],
+			"ICON" => [
+				"@TRANSLATION" => "Productlogo-URL",
+				"EXAMPLE" => "https://example.com/mylogo.png",
+				"HELP" => "This pciture is displayed on the authorisation page."
+			],
+			"REDIRECT_URI" => [
+				"@TRANSLATION" => "Redirect-URI",
+				"EXAMPLE" => "https://example.com/oauth2callback",
+				"HELP" => "After accepting the permissions, the user is redirected to this link."
+			],
+			"DESCRIPTION" => [
+				"@TRANSLATION" => "Product description",
+				"EXAMPLE" => "This App is about ... ",
+				"HELP" => "This will be displayed to the user when he wants more information about your app."
+			],
+			"NAME" => [
+				"@TRANSLATION" => "Product name",
+				"EXAMPLE" => "The best App in the world",
+				"HELP" => "This is the displayed name of your app. It is shown on the authorisation page for example."
 			]
 		]
 	]

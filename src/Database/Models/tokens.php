@@ -1,13 +1,13 @@
 <?php
-namespace UserFrosting\Sprinkle\api\Model;
+namespace UserFrosting\Sprinkle\Api\Database\Models;
 
-use UserFrosting\Sprinkle\Core\Model\UFModel;
+use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
-class tokens extends UFModel {
+class tokens extends Model {
 
     /*
     // * @var string The name of the table for the current model.
-     
+
     protected $table = "tokens";
 
     protected $fillable = [
@@ -19,9 +19,9 @@ class tokens extends UFModel {
 		"expires_on"
     ];
 
-    
+
     // * Directly joins the related user, so we can do things like sort, search, paginate, etc.
-     
+
     public function scopeJoinUser($query)
     {
         $query = $query->select('tokens.*');
@@ -31,12 +31,12 @@ class tokens extends UFModel {
         return $query;
     }
 
-    
+
     // * Get the user associated with this owler.
-     
+
     public function user()
     {
-        //** @var UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper 
+        //** @var UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper
         $classMapper = static::$ci->classMapper;
 
         return $this->belongsTo($classMapper->getClassMapping('user'), 'user_id');

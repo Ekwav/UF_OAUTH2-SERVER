@@ -1,4 +1,4 @@
-{% extends "layouts/default.html.twig" %}
+{% extends "pages/abstract/default.html.twig" %}
 
 
 {% block stylesheets_page %}
@@ -19,17 +19,17 @@
 		<div class="col-md-9  col-md-offset-1">
 		<table class="table table-striped">
           <tbody>
-     
+
 		{% for scope in scopes %}
 		<tr>
             <td><h5>{{scope.name}}</h5>
 			<p> {{scope.description}} </p></td>
             <td><input type="checkbox" data-toggle="toggle" checked data-on="{{translate('OAUTH2.PROCESS.ALLOWED')}}" data-off="{{translate('OAUTH2.PROCESS.DENIED')}}" onChange="updatescopes('{{scope.slug}}')"></td>
            </tr>
-		
+
 		  {% endfor %}
          </tbody>
-		</table>  
+		</table>
             <input type="hidden" class="form-control"  value="{%for scope in scopes%}{{scope.slug}} {%endfor%}" name="scope" id="scope">
             <input type="hidden" class="form-control" value="{{app.public_id}}" name="client_id">
 			<input type="hidden" class="form-control" value="{{type}}" name="response_type">

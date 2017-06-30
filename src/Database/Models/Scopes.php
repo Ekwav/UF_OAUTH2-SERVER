@@ -1,9 +1,9 @@
 <?php
-namespace UserFrosting\Sprinkle\Api\Model;
+namespace UserFrosting\Sprinkle\Api\Database\Models;
 
-use UserFrosting\Sprinkle\Core\Model\UFModel;
+use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
-class Scopes extends UFModel {
+class Scopes extends Model {
 
     public $timestamps = true;
 
@@ -16,6 +16,6 @@ class Scopes extends UFModel {
         "slug",
         "name",
         "description",
-		"permissions",
+        "permissions",
     ];
 }

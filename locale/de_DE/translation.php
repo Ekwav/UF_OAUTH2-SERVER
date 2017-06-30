@@ -10,10 +10,10 @@ return array(
 			"ALLOWED" => "Erlaubt",
 			"DENIED" => "Verweigert"
 		],
-		
+
 		"PERMISSION" => "Berechtigung",
-		
-		
+
+
 		"ERROR" => [
 			"@TRANSLATION" => "Im Autentificationsprozess ist etwas schief gelaufen.",
 			"TITLE" => "Authetificationsfehler",
@@ -23,7 +23,7 @@ return array(
 			"NO_CLIENT" => "Es wurde keine AppID angegeben. Bitte gib einen Wert für 'client_id' an.",
 			"REDIRECT" => "Klicke <a href='{{redirect}}'>hier</a> um in die App zurückzukommen."
 		],
-		
+
 		"SCOPE" => [
 			"EMAIL" => [
 				"@TRANSLATION" => "E-mail",
@@ -67,7 +67,7 @@ return array(
 			"REDIRECT_URI" => [
 				"@TRANSLATION" => "Weiterleitungs-URI",
 				"EXAMPLE" => "https://example.com/oauth2callback",
-				"HELP" => "Nach dem aktzeptieren der Berechtigungen wird der Nutzer zu diesem Link weitergeleitet."
+				"HELP" => "Nach dem akzeptieren der Berechtigungen wird der Nutzer zu diesem Link weitergeleitet."
 			],
 			"DESCRIPTION" => [
 				"@TRANSLATION" => "Produktbeschreibung",

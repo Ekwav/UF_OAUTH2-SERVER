@@ -1,4 +1,4 @@
-{% extends "layouts/dashboard.html.twig" %}
+{% extends "pages/abstract/dashboard.html.twig" %}
 
 {% block page_title %}{{translate("OAUTH2.CLIENT.NEW")}}{% endblock %}
 {% block page_description %}{{translate("OAUTH2.CLIENT.NEW.DESCRIPTION")}}{% endblock %}
@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <form id="account-settings" role="form" action="{{site.uri.public}}/app/new" method="post">
     <div class="box-body">
-        {% include "components/csrf.html.twig" %}
+        {% include "forms/csrf.html.twig" %}
 
         {% block settings_account %}
             <div class="form-group">
@@ -31,7 +31,7 @@
                 <label for="input-icon" class="ccontrol-label">{{translate("OAUTH2.CLIENT.ICON")}} <button type="button" class="btn btn-link btn-xs" data-toggle="tooltip" title="{{translate('OAUTH2.CLIENT.ICON.HELP')}} "><i class="fa fa-info"></i></button></label>
                 <input type="text" id="icon" class="form-control" name="icon" autocomplete="off" placeholder="{{translate("OAUTH2.CLIENT.ICON.EXAMPLE")}}" {{page.visibility}}>
             </div>
-            
+
         {% endblock %}
     </div>
     <div class="box-footer text-center">
@@ -45,11 +45,11 @@
 {% block scripts_page %}
     <!-- Include validation rules -->
     <script>
-    {% include "components/page.js.twig" %}
+    {% include "pages/partials/page.js.twig" %}
     </script>
 
     <!-- Include form widgets JS -->
     {{ assets.js('js/form-widgets') | raw }}
 
-    
+
 {% endblock %}

@@ -9,7 +9,7 @@
 namespace UserFrosting\Sprinkle\Api;
 
 use UserFrosting\Sprinkle\Api\ServicesProvider\ServicesProvider;
-use UserFrosting\Sprinkle\Core\Initialize\Sprinkle;
+use UserFrosting\System\Sprinkle\Sprinkle;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
 use League\OAuth2\Server\AuthorizationServer;
@@ -24,13 +24,13 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class Api extends Sprinkle
 {
-   
+
      //* Register OAuth2 services.
-     
+
     public function init()
     {
 		$serviceProvider = new ServicesProvider();
         $serviceProvider->register($this->ci);
-		
+
     }
 }
