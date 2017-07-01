@@ -14,7 +14,7 @@ class ClientRepository implements ClientRepositoryInterface
     /**
      * {@inheritdoc}
      */
-	 
+
 	 public function __construct($clients)
 	 {
 		 $this->clients = $clients;
@@ -24,7 +24,7 @@ class ClientRepository implements ClientRepositoryInterface
         $clients = [
             $this->clients->public_id => [
                 'secret'          => $this->clients->secret,// we normally don't need this, because the user will vertify himself
-                'name'            => $this->clients-name,
+                'name'            => $this->clients->name,
                 'redirect_uri'    => $this->clients->redirect,
                 'is_confidential' => true,
             ],

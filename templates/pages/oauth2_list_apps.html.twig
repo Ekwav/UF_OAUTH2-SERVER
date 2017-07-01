@@ -30,8 +30,8 @@
 									</div>
                                 </td>
                                 <td nowrap="nowrap">
-                                    {% if App.status == "1" %}
-                                        <i>Available</i>
+                                    {% if App.revoked == "0" %}
+                                        <i>Active</i>
                                     {% else %}
                                         <i>Disabled</i>
                                     {% endif %}
@@ -44,9 +44,9 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                             <li>
-                                                <a href="#" class="js-displayForm" data-toggle="modal" data-formUrl="/Apps/{{app.id}}/edit"><i class="fa fa-edit"></i> Edit</a>
+                                                <a href="#" class="disabled js-displayForm" data-toggle="modal" data-formUrl="/Apps/{{app.id}}/edit"><i class="fa fa-edit"></i> Edit (not yet)</a>
                                             </li>
-											<li>
+                                            <li>
                                                 <a href="{{site.uri.public}}/authorize/{{App.public_id}}/token/full_access"><i class="fa fa-user"></i> Optain a token</a>
                                             </li>
                                             <li>

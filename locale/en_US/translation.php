@@ -48,6 +48,14 @@ return array(
 			"BASIC" => [
 				"@TRANSLATION" => "Basic",
 				"DESCRIPTION" => "Gives acces to your userID, username and CloudSave."
+			],
+			"FULL_ACCESS" => [
+				"@TRANSLATION" => "FULL ACCESS",
+				"DESCRIPTION" => "This Application will get access to EVERYTHING you have access to. Be careful to who you grant this permission!"
+			],
+			"USER_ID" => [
+				"@TRANSLATION" => "UserID",
+				"DESCRIPTION" => "This id is assigned to your account and can be used to validate your identity. You need atleast this permission to authorize an app. This Number holds none of your personal information!"
 			]
 		],
 		"CLIENT" => [

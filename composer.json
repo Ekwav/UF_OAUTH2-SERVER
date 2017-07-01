@@ -1,7 +1,7 @@
 {
-    "name": "coflnet/api",
+    "name": "ekwav/uf_oauth2_server",
     "type": "sprinkle",
-    "description": "Api module for UserFrosting.",
+    "description": "OAuth2 Api module for UserFrosting.",
     "license" : "",
     "authors" : [
         {

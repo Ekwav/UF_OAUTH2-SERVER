@@ -53,6 +53,14 @@ return array(
 				"@TRANSLATION" => "E-mail",
 				"DESCRIPTION" => "Die E-mail deines Accounts."
 			],
+			"FULL_ACCESS" => [
+				"@TRANSLATION" => "Administratorischer Zugriff",
+				"DESCRIPTION" => "Diese App erhält Zugriff auf alles, worauf du auch Zugriff hast. Vergib diese Berechtigung mit bedacht!"
+			],
+			"USER_ID" => [
+				"@TRANSLATION" => "Nutzer Nummer",
+				"DESCRIPTION" => "Eine deinem Account zugeordnete Nutzernummer, die es ermöglicht deine Identität zu beweisen, du brauchst mindestens diese Brechtigung. Diese Nummer sagt nichts über dich aus!"
+			],
 		],
 		"CLIENT" => [
 			"NEW" => [

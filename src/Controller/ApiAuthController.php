@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use UserFrosting\Sprinkle\Api\OAuth2\RefreshTokenRepository;
 use UserFrosting\Sprinkle\Api\OAuth2\UserRepository;
+use UserFrosting\Sprinkle\Api\OAuth2\UserEntity;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
 use UserFrosting\Sprinkle\Api\Database\Models\Scopes;
 use UserFrosting\Sprinkle\Api\Database\Models\OauthClients;
@@ -21,7 +22,7 @@ use UserFrosting\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
-use UserFrosting\Sprinkle\Account\Model\User;
+use UserFrosting\Sprinkle\Account\Database\Models\User;
 
 class ApiAuthController extends SimpleController
 {
@@ -180,25 +181,37 @@ class ApiAuthController extends SimpleController
 	}
 
 
+  // This is an example Controller how to get user information with a token
 	public function getUserInfo($request, $response, $args)
 	{
-		// This is the Controller to get userinformation with a token
+    // First of all we get the user id and the scopes
 		$scopes = $request->getAttribute('oauth_scopes', []);
 		$user_id = $request->getAttribute('oauth_user_id', []);
 
+    // Now we will query the database with the user id
 		$user = User::where('id',  $user_id)->first();
 
-		$response["user_id"] = $user->id;
+    // No matter what specified by the user we will always return his id.
+		$information["user_id"] = $user->id;
 
+    // If the user activated basic, we return user_name and his locale
 		if (in_array('basic', $scopes)) {
-		$response["user_name"] = $user->user_name;
-		$response["locale"] = $user->locale;
+		$information["user_name"] = $user->user_name;
+		$information["locale"] = $user->locale;
 		}
 		if (in_array('email', $scopes)) {
-		$response["email"] = $user->email;
+		$information["email"] = $user->email;
 		}
-		return $response->withJson($response);
+    // If the user granted full_access, we return everything we have
+    // or want, we shouldn't give out the password even if its encrypted.
+    if (in_array('full_access', $scopes)){
+		$information["user_name"] = $user->user_name;
+		$information["locale"] = $user->locale;
+    $information["email"] = $user->email;
+		}
+		return $response->withJson($information);
 	}
+
 
 	public function renderClients($request, $response, $args)
 	{

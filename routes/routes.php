@@ -12,13 +12,13 @@ $app->get('/finish_authorize', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthCont
 //$app->get('/oauth2/change', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:oAuth2ChangeRequest');
 $app->get('/apps', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:renderClients')->add('authGuard');
 $app->get('/app/new', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:renderAddNewClient')->add('authGuard');
-$app->get('/app/new/scope', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:newScope');
+//$app->get('/app/new/scope', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:newScope');
 
 $app->post('/authorize_vertify', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:validateAuthRequest')->add('authGuard');
 $app->post('/app/new', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:addNewClient')->add('authGuard');
 
 // This is a test api endpoint to try it :)
-// IMPORTANT! YOU NEED TO ADD ALL YOUR API ENDPOINTS TO THE EXECLUTION LIST OF CSRF IN YOUR INDEX.PHP 
+// IMPORTANT! YOU NEED TO ADD ALL YOUR API ENDPOINTS TO THE CSRF.BLACKLIST IN YOUR config file
 // OTHERWISE THE CSRF MIDDLEWARE WILL BLOCK THEM! You can find an example in the README
 $app->post('/api/userinfo', 'UserFrosting\Sprinkle\Api\Controller\ApiAuthController:getUserInfo')->add(new ResourceServerMiddleware($this->ci->ResourceServer));
 

@@ -51,8 +51,15 @@ class OauthScopes extends Migration
             ]),
             'full_access' => new Scopes([
               'slug' => 'full_access',
-              'name' => 'OAUTH2.SCOPE.FULL',
-              'description' => 'OAUTH2.SCOPE.BASIC.DESCRIPTION',
+              'name' => 'OAUTH2.SCOPE.FULL_ACCESS',
+              'description' => 'OAUTH2.SCOPE.FULL_ACCESS.DESCRIPTION',
+              'permissions' => ''
+            ])
+            ,
+            'user_id' => new Scopes([
+              'slug' => 'user_id',
+              'name' => 'OAUTH2.SCOPE.USER_ID',
+              'description' => 'OAUTH2.SCOPE.USER_ID',
               'permissions' => ''
             ])
           ];

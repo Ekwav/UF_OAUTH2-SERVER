@@ -4,7 +4,21 @@
      * Sample site configuration file for UserFrosting.  You should definitely set these values!
      *
      */
-    return [   
+    return [
+        'csrf' => [
+            // A list of url paths to ignore CSRF checks on
+            // URL paths will be matched against each regular expression in this list.
+            // Each regular expression should map to an array of methods.
+            // Regular expressions will be delimited with ~ in preg_match, so if you
+            // have routes with ~ in them, you must escape this character in your regex.
+            // Also, remember to use ^ when you only want to match the beginning of a URL path!
+            // See the docs https://learn.userfrosting.com/routes-and-controllers/client-input/csrf-guard#BlacklistingRoutes
+            'blacklist' =>  [
+              'api/userinfo' => [
+                'POST'
+              ]
+            ]
+          ],
           'throttles' => [
             'guess_secret_attempt' => [
                 'method'   => 'ip',
@@ -22,7 +36,7 @@
                 'method'   => 'data', //app id
                 'interval' => 172800,
                 'delays' => [
-					1 => 3600,
+                    1 => 3600,
                     2 => 7200,	//2h
                     3 => 21600, //6h
                     4 => 43200, //12 hours
@@ -30,35 +44,35 @@
                     6 => 172800, //two days
                 ]
             ],
-			'login_from_outside_default' => [
+              'login_from_outside_default' => [
                 'method'   => 'data', //app id
                 'interval' => 7200,
                 'delays' => [
-					10 => 60,
-                    100 => 600,
-                    500 => 3600,
-                    1000 => 21600,
+                  10 => 60,
+                  100 => 600,
+                  500 => 3600,
+                  1000 => 21600,
                 ]
             ],
-			'login_from_outside_trusted' => [
+            'login_from_outside_trusted' => [
                 'method'   => 'data', //app id
                 'interval' => 7200,
                 'delays' => [
-					100 => 60,
-                    1000 => 600,
-                    5000 => 3600,
-                    1000 => 21600,
+                  100 => 60,
+                  1000 => 600,
+                  5000 => 3600,
+                  1000 => 21600,
                 ]
             ],
 			'oauth2_authorize_request' => [
                 'method'   => 'data', //user id
                 'interval' => 7200,
                 'delays' => [
-					10 => 60,
-                    20 => 300,
-                    50 => 3600,
-                    100 => 21600,
+                  10 => 60,
+                  20 => 300,
+                  50 => 3600,
+                  100 => 21600,
                 ]
             ],
-        ],     
+        ],
     ];
