@@ -14,9 +14,7 @@ And also for other people that are just getting started.
 
 
 # Installation
-1. ## Install
-Edit UserFrosting `app/sprinkles.json` file and add the following to the `require` list : `"ekwav/uf_oauth2_server": "0.0.*"`. Add `api` to the `base` list. Your `sprinkles.json` should look like this:
-
+1. Edit UserFrosting `app/sprinkles.json` file and add the following to the `require` list : `"ekwav/uf_oauth2_server": "0.0.*"`. Add `api` to the `base` list. Your `sprinkles.json` should look like this:
 ```
 {
     "require": {
