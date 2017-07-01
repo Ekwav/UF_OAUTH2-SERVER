@@ -14,15 +14,29 @@ And also for other people that are just getting started.
 
 
 # Installation
-1. Download and copy the Sprinkle, or open it with GitHub and clone it in your Sprinkle folder.  
-2. Add `api` to your `sprinkles.json`.  
-3. Run `composer update` in your Userfrosting installation directory (rootfolder).  
-4. Then you have to create a public and private key, we need them in order to encrypt the tokens.  
-Navigate to `UF_OAUTH2-SERVER/src/OAuth2` open the terminal and run `openssl genrsa -out private.key 1024` _you can also replace 1024 with 2048 to generate a longer key_
+1. ## Install
+Edit UserFrosting `app/sprinkles.json` file and add the following to the `require` list : `"ekwav/uf_oauth2_server": "0.0.*"`. Add `api` to the `base` list. Your `sprinkles.json` should look like this:
+
+```
+{
+    "require": {
+        "ekwav/uf_oauth2_server": "0.0.*"
+    },
+    "base": [
+        "core",
+        "account",
+        "admin",
+        "Api"
+    ]
+}
+```  
+2. Run `composer update` to download the sprinkle.  
+3. Then you have to create a public and private key, we need them in order to encrypt the tokens.  
+Navigate to `app/sprinkles/Api/src/OAuth2` open the terminal and run `openssl genrsa -out private.key 1024` _you can also replace 1024 with 2048 to generate a stronger key_
 Then you have to extract the public key from the private key with `openssl rsa -in private.key -pubout -out public.key`. More information on this [here](https://oauth2.thephpleague.com/installation/)
-5. Open the terminal in your root Userfrosting directory and run `php bakery bake` till it finishes and closes the terminal.  
+4. Open the terminal in your root Userfrosting directory and run `php bakery bake` wait untill it finishes and closes the terminal.  
 You can now create `Clients` aka Applications.
-6. Open `YourDomain/apps` and continue there.  
+5. Open `YourDomain/apps` and continue there.  
 
 ## It looks like this
 ![screenshot1](https://github.com/Ekwav/UF_OAUTH2-SERVER/blob/master/screenshots/authorization_page.PNG?raw=true)
