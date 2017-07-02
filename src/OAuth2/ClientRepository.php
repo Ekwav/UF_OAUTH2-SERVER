@@ -6,9 +6,9 @@
  *
  * @link        https://github.com/thephpleague/oauth2-server
  */
-namespace UserFrosting\Sprinkle\Api\OAuth2;
+namespace UserFrosting\Sprinkle\OAuth2Server\OAuth2;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
-use UserFrosting\Sprinkle\Api\OAuth2\ClientEntity;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\ClientEntity;
 class ClientRepository implements ClientRepositoryInterface
 {
     /**

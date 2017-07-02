@@ -4,12 +4,12 @@
  *
  * @link      https://github.com/Ekwav/UF_OAUTH2-SERVER
  */
-namespace UserFrosting\Sprinkle\Api\Database\Migrations\v002;
+namespace UserFrosting\Sprinkle\OAuth2Server\Database\Migrations\v002;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use UserFrosting\System\Bakery\Migration;
-use UserFrosting\Sprinkle\Api\Database\Models\Scopes;
+use UserFrosting\Sprinkle\OAuth2Server\Database\Models\Scopes;
 
 /**
  * Scopes table migration

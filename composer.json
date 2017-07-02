@@ -1,6 +1,6 @@
 {
     "name": "ekwav/uf_oauth2_server",
-    "type": "sprinkle",
+    "type": "userfrosting-sprinkle",
     "description": "OAuth2 Api module for UserFrosting.",
     "keywords": ["OAuth2", "Server", "userfrosting"],
     "homepage": "https://github.com/Ekwav/UF_OAUTH2-SERVER",
@@ -17,10 +17,10 @@
 	},
     "autoload": {
         "psr-4": {
-            "UserFrosting\\Sprinkle\\Api\\": "src/"
+            "UserFrosting\\Sprinkle\\OAuth2Server\\": "src/"
         }
     },
     "extra": {
-        "installer-name": "Api"
+        "installer-name": "OAuth2Server"
     }
 }

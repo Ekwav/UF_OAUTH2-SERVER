@@ -1,5 +1,5 @@
 <?php
-namespace UserFrosting\Sprinkle\Api\Database\Models;
+namespace UserFrosting\Sprinkle\OAuth2Server\Database\Models;
 
 use UserFrosting\Sprinkle\Core\Database\Models\Model;
 

@@ -1,27 +1,27 @@
 <?php
 
-namespace UserFrosting\Sprinkle\Api\ServicesProvider;
+namespace UserFrosting\Sprinkle\OAuth2Server\ServicesProvider;
 
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Grant\ImplicitGrant;
-use UserFrosting\Sprinkle\Api\OAuth2\UserEntity;
-use UserFrosting\Sprinkle\Api\OAuth2\AccessTokenRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\ClientRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\ScopeRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\UserEntity;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\AccessTokenRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\ClientRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\ScopeRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use UserFrosting\Sprinkle\Api\OAuth2\RefreshTokenRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\UserRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\RefreshTokenRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\UserRepository;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
 use League\OAuth2\Server\Grant\RefreshTokenGrant;
 use League\OAuth2\Server\Middleware\AuthorizationServerMiddleware;
-use UserFrosting\Sprinkle\Api\OAuth2\AuthCodeRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\AuthCodeRepository;
 use League\OAuth2\Server\ResourceServer;
-use UserFrosting\Sprinkle\Api\Database\Models\OauthClients;
-use UserFrosting\Sprinkle\Api\Database\Models\Scopes;
+use UserFrosting\Sprinkle\OAuth2Server\Database\Models\OauthClients;
+use UserFrosting\Sprinkle\OAuth2Server\Database\Models\Scopes;
 
 class ServicesProvider
 {

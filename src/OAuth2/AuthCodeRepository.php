@@ -6,10 +6,10 @@
  *
  * @link        https://github.com/thephpleague/oauth2-server
  */
-namespace UserFrosting\Sprinkle\Api\OAuth2;
+namespace UserFrosting\Sprinkle\OAuth2Server\OAuth2;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
-use UserFrosting\Sprinkle\Api\OAuth2\AuthCodeEntity;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\AuthCodeEntity;
 class AuthCodeRepository implements AuthCodeRepositoryInterface
 {
     /**

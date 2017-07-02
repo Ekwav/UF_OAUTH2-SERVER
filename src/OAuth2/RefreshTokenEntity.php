@@ -6,7 +6,7 @@
  *
  * @link        https://github.com/thephpleague/oauth2-server
  */
-namespace UserFrosting\Sprinkle\Api\OAuth2;
+namespace UserFrosting\Sprinkle\OAuth2Server\OAuth2;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;

@@ -6,18 +6,18 @@
  * @copyright Copyright (c) 2017 Ekwav (Coflnet)
  * @license   -ask me if you want to distribute my code, only thing that you are not allowed to chang is the Powered by Coflnet :)
  */
-namespace UserFrosting\Sprinkle\Api\Controller;
+namespace UserFrosting\Sprinkle\OAuth2Server\Controller;
 
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use UserFrosting\Sprinkle\Api\OAuth2\RefreshTokenRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\UserRepository;
-use UserFrosting\Sprinkle\Api\OAuth2\UserEntity;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\RefreshTokenRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\UserRepository;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\UserEntity;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
-use UserFrosting\Sprinkle\Api\Database\Models\Scopes;
-use UserFrosting\Sprinkle\Api\Database\Models\OauthClients;
+use UserFrosting\Sprinkle\OAuth2Server\Database\Models\Scopes;
+use UserFrosting\Sprinkle\OAuth2Server\Database\Models\OauthClients;
 use UserFrosting\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\ServerSideValidator;

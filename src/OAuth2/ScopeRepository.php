@@ -7,11 +7,11 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace UserFrosting\Sprinkle\Api\OAuth2;
+namespace UserFrosting\Sprinkle\OAuth2Server\OAuth2;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
-use UserFrosting\Sprinkle\Api\OAuth2\ScopeEntity;
+use UserFrosting\Sprinkle\OAuth2Server\OAuth2\ScopeEntity;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
 
 class ScopeRepository implements ScopeRepositoryInterface
@@ -28,8 +28,8 @@ class ScopeRepository implements ScopeRepositoryInterface
 		 }
 		 array_flip($scopes);
 	 }
-	 
-	 
+
+
     public function getScopeEntityByIdentifier($scopeIdentifier)
     {
         $scope = new ScopeEntity();
