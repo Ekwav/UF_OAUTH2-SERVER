@@ -19,6 +19,25 @@
               ]
             ]
           ],
+          'oauth2server' => [
+
+            // IMPORTANT change this value!
+            // You can copy-past this into your comandline to get a key:
+            // php -r 'echo base64_encode(random_bytes(32)), PHP_EOL;'
+            'EncryptionKey' => '4XrWDreG9k2C7G0RLv/kyETd24kHT376bgGqhWk6fr4=',
+            // Auth Codes exparations time, 10 min
+            'auth_code_time' => 'PT10M',
+            // Refresh token exparations time, 3 months
+            // If a user didn't open your application for this amount of time, he has to authorize your app again.
+            'refresh_token_time' => 'P3M',
+            // Access token exparations time, 6 hours
+            'access_token_time' => 'PT6H',
+            // Note: if a token isn't used within the time defined above it isn't usable anymore, for security purposes.
+
+            // If you generated a public and privat key somewhere else change this values.
+            'public_key_path' => '',
+            'private_key_path' => ''
+          ],
           'throttles' => [
             'guess_secret_attempt' => [
                 'method'   => 'ip',

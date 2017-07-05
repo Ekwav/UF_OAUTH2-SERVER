@@ -36,8 +36,16 @@ class ServicesProvider
 			$accessTokenRepository = new AccessTokenRepository();
 			$authCodeRepository = new AuthCodeRepository();
 			$refreshTokenRepository = new RefreshTokenRepository();
-			$privateKeyPath = 'file://' . __DIR__ . '/../OAuth2/private.key';
-			$publicKeyPath = 'file://' . __DIR__ . '/../OAuth2/public.key';
+      if($c->config['oauth2server.private_key_path'] === ""){
+			     $privateKeyPath = 'file://' . __DIR__ . '/../OAuth2/private.key';
+      } else
+          $privateKeyPath = $c->config['oauth2server.private_key_path'];
+
+      if($c->config['oauth2server.public_key_path'] === ""){
+			     $publicKeyPath = 'file://' . __DIR__ . '/../OAuth2/public.key';
+      } else {
+          $publicKeyPath = $c->config['oauth2server.public_key_path'];
+      }
 
 			// Setup the authorization server
 			$OAuth2 = new AuthorizationServer(
@@ -45,36 +53,36 @@ class ServicesProvider
 				$accessTokenRepository,
 				$scopeRepository,
 				$privateKeyPath,
-				$publicKeyPath
+        $c->config['oauth2server.EncryptionKey']
 			);
 
 
 			// Enable the implicit grant on the server with a token TTL of 1 hour
-			// You can change P1W to P3 months to allow access tokens that last three months
+			// You can change P1W to P3M (months) to allow access tokens that last three months
 			// With this grant type you don't have to deal with anything else. It is the easiest to get startet.
+      // But it is only for Browser apps that are not able to store a token in the long term.
 			// Read more on the league/oauth2 documentation: https://oauth2.thephpleague.com/authorization-server/implicit-grant/
-			$OAuth2->enableGrantType(
+      	$OAuth2->enableGrantType(
 				new ImplicitGrant(new \DateInterval('P1W')),
 				new \DateInterval('P1W') // access tokens will expire after 1 hour
 			);
 
 
-			// This is the AuthCode Grant server, it is recomended if you want to validate the App because your Server will
-			// only issue an autorisation code that has to be sent with the client secret to get an access token.
+			// This is the AuthCode Grant server, it is recomended if you have a mobile application.
 			// Read more on league/oauth2 docs: https://oauth2.thephpleague.com/authorization-server/auth-code-grant/
 			// authorization codes will expire after 10 minutes
 			$grant = new \League\OAuth2\Server\Grant\AuthCodeGrant(
 				$authCodeRepository,
 				$refreshTokenRepository,
-				new \DateInterval('PT10M')
+				new \DateInterval($c->config['oauth2server.auth_code_time'])
 			);
 
-			$grant->setRefreshTokenTTL(new \DateInterval('P1M')); // refresh tokens will expire after 1 month
+			$grant->setRefreshTokenTTL(new \DateInterval($c->config['oauth2server.refresh_token_time']));
 
 			// Enable the authentication code grant on the server
 			$OAuth2->enableGrantType(
 				$grant,
-				new \DateInterval('PT6H') // access tokens will expire after 6 hours
+				new \DateInterval($c->config['oauth2server.access_token_time'])
 			);
 			return $OAuth2;
 		};
@@ -82,7 +90,11 @@ class ServicesProvider
 
 		// Create the ResourceServer Service, you can call this on your route to protect access
 		$container['ResourceServer'] = function ($c) {
-			$publicKeyPath = 'file://' . __DIR__ . '/../OAuth2/public.key';
+      if($c->config['oauth2server.public_key_path'] === ""){
+           $publicKeyPath = 'file://' . __DIR__ . '/../OAuth2/public.key';
+      } else {
+          $publicKeyPath = $c->config['oauth2server.public_key_path'];
+      }
 			$server = new ResourceServer(
 				new AccessTokenRepository(),
 				$publicKeyPath
