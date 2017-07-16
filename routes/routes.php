@@ -17,9 +17,8 @@ $app->get('/app/new', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthCont
 $app->post('/authorize_vertify', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:validateAuthRequest')->add('authGuard');
 $app->post('/app/new', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:addNewClient')->add('authGuard');
 
+$app->post('/oauth2/access_token', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:AccessToken');
 // This is a test api endpoint to try it :)
 // IMPORTANT! YOU NEED TO ADD ALL YOUR API ENDPOINTS TO THE CSRF.BLACKLIST IN YOUR config file
 // OTHERWISE THE CSRF MIDDLEWARE WILL BLOCK THEM! You can find an example in the README
 $app->post('/api/userinfo', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:getUserInfo')->add(new ResourceServerMiddleware($this->ci->ResourceServer));
-
-?>

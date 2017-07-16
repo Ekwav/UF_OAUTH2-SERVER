@@ -16,6 +16,9 @@
             'blacklist' =>  [
               'api/userinfo' => [
                 'POST'
+              ],
+              'access_token' => [
+                'POST'
               ]
             ]
           ],
@@ -34,7 +37,7 @@
             'access_token_time' => 'PT6H',
             // Note: if a token isn't used within the time defined above it isn't usable anymore, for security purposes.
 
-            // If you generated a public and privat key somewhere else change this values.
+            // If you generated a public and privat key somewhere else change this to be the exact path to them.
             'public_key_path' => '',
             'private_key_path' => ''
           ],

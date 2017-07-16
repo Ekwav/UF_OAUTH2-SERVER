@@ -2,7 +2,7 @@
 
 namespace UserFrosting\Sprinkle\OAuth2Server\ServicesProvider;
 
-use UserFrosting\Sprinkle\Core\Controller\SimpleController;
+
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -25,8 +25,8 @@ use UserFrosting\Sprinkle\OAuth2Server\Database\Models\Scopes;
 
 class ServicesProvider
 {
-    public function register($container)
-    {
+  public function register($container)
+  {
 		$container['OAuth2'] = function ($c) {
 			$all_scopes = Scopes::where('created_at', '>', 2)->get()->toArray();
 
@@ -62,7 +62,7 @@ class ServicesProvider
 			// With this grant type you don't have to deal with anything else. It is the easiest to get startet.
       // But it is only for Browser apps that are not able to store a token in the long term.
 			// Read more on the league/oauth2 documentation: https://oauth2.thephpleague.com/authorization-server/implicit-grant/
-      	$OAuth2->enableGrantType(
+      $OAuth2->enableGrantType(
 				new ImplicitGrant(new \DateInterval('P1W')),
 				new \DateInterval('P1W') // access tokens will expire after 1 hour
 			);
@@ -84,11 +84,24 @@ class ServicesProvider
 				$grant,
 				new \DateInterval($c->config['oauth2server.access_token_time'])
 			);
+
+
+      // Activate the refresh token Grant type
+      // It is needed to get a new access token.
+      $refreshGrant = new \League\OAuth2\Server\Grant\RefreshTokenGrant($refreshTokenRepository);
+      $refreshGrant->setRefreshTokenTTL(new \DateInterval($c->config['oauth2server.refresh_token_time'])); // new refresh tokens will expire after 1 month
+
+      // Enable the refresh token grant on the server
+      $OAuth2->enableGrantType(
+        $refreshGrant,
+        new \DateInterval($c->config['oauth2server.access_token_time']));
+
 			return $OAuth2;
-		};
+		 };
 
 
-		// Create the ResourceServer Service, you can call this on your route to protect access
+		// Create the ResourceServer Service, you can call this on your route to protect it
+    // You could also use this on another userfrosting installation with the same keys.
 		$container['ResourceServer'] = function ($c) {
       if($c->config['oauth2server.public_key_path'] === ""){
            $publicKeyPath = 'file://' . __DIR__ . '/../OAuth2/public.key';

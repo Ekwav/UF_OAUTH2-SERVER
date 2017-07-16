@@ -25,7 +25,7 @@ class UserRepository implements UserRepositoryInterface
         ClientEntityInterface $clientEntity
     ) {
         if ($username === 'alex' && $password === 'whisky') {
-            return new UserEntity();
+            return new UserEntity("1");
         }
 
         return;

@@ -44,11 +44,11 @@ class UserEntity implements UserEntityInterface
      */
     public function __construct($userID)
     {
-		$this->userID = $userID;
+		    $this->userID = $userID;
     }
 
     public function getIdentifier()
     {
-		return $this->userID;
+		    return $this->userID;
     }
 }

@@ -26,8 +26,9 @@ use UserFrosting\Sprinkle\Account\Database\Models\User;
 
 class ApiAuthController extends SimpleController
 {
+
     public function finish_authorize($request, $response, $args)
-	{
+    {
 		$server = $this->ci->OAuth2;
 		try {
 			 $authRequest = $_SESSION["auth_request"];
@@ -192,7 +193,7 @@ class ApiAuthController extends SimpleController
 		$user = User::where('id',  $user_id)->first();
 
     // No matter what specified by the user we will always return his id.
-		$information["user_id"] = $user->id;
+		$information["user_id"] = $user_id;
 
     // If the user activated basic, we return user_name and his locale
 		if (in_array('basic', $scopes)) {
@@ -213,11 +214,28 @@ class ApiAuthController extends SimpleController
 	}
 
 
+  public function AccessToken($request, $response, $args)
+  {
+    $client_id = $request->getParsedBody()['client_id'];
+    $this->ci->session['CLIENT'] = OauthClients::where('public_id', '=' , $client_id)->first();
+    $server = $this->ci->OAuth2;
+    try {
+        return $server->respondToAccessTokenRequest($request, $response);
+    } catch (OAuthServerException $exception) {
+        return $exception->generateHttpResponse($response);
+    } catch (\Exception $exception) {
+        $response->getBody()->write($exception->getMessage());
+        return $response->withStatus(500);
+    }
+  }
+
+
 	public function renderClients($request, $response, $args)
 	{
 		$apps = OauthClients::where('user_id', '=' , $this->ci->currentUser->id)->get()->toArray();
 		return $this->ci->view->render($response, 'pages/oauth2_list_apps.html.twig', ['Apps' => $apps]);
 	}
+
 
 	public function renderAddNewClient($request, $response, $args)
 	{

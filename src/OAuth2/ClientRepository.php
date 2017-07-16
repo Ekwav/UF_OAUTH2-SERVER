@@ -9,41 +9,47 @@
 namespace UserFrosting\Sprinkle\OAuth2Server\OAuth2;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use UserFrosting\Sprinkle\OAuth2Server\OAuth2\ClientEntity;
+
 class ClientRepository implements ClientRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
 
-	 public function __construct($clients)
+	 public function __construct()
 	 {
-		 $this->clients = $clients;
+		 $this->clients = $_SESSION["CLIENT"];
 	 }
     public function getClientEntity($clientIdentifier, $grantType, $clientSecret = null, $mustValidateSecret = true)
     {
         $clients = [
             $this->clients->public_id => [
-                'secret'          => $this->clients->secret,// we normally don't need this, because the user will vertify himself
+                'secret'          => $this->clients->secret,
                 'name'            => $this->clients->name,
                 'redirect_uri'    => $this->clients->redirect,
                 'is_confidential' => true,
             ],
         ];
+        //$this->clients->secret = password_hash()
+
         // Check if client is registered
         if (array_key_exists($clientIdentifier, $clients) === false) {
             return;
         }
+
         if (
             $mustValidateSecret === true
             && $clients[$clientIdentifier]['is_confidential'] === true
-            && password_verify($clientSecret, $clients[$clientIdentifier]['secret']) === false
+            && $clientSecret !== $this->clients->secret
         ) {
             return;
         }
+
         $client = new ClientEntity();
         $client->setIdentifier($clientIdentifier);
-        $client->setName($clients[$clientIdentifier]['name']);
-        $client->setRedirectUri($clients[$clientIdentifier]['redirect_uri']);
+        $client->setName($this->clients->name);
+        $client->setRedirectUri($this->clients->redirect);
+        \UserFrosting\Sprinkle\Core\Facades\Debug::debug(print_r($client,true));
         return $client;
     }
 }
