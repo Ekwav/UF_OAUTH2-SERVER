@@ -23,6 +23,7 @@ use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
+use UserFrosting\Sprinkle\OAuth2Server\Sprunje\ClientSprunje;
 
 class ApiAuthController extends SimpleController
 {
@@ -237,24 +238,38 @@ class ApiAuthController extends SimpleController
 	}
 
 
-	public function renderAddNewClient($request, $response, $args)
+	public function getModalCreateClient($request, $response, $args)
 	{
-		$schema = new RequestSchema('schema://new_oauth_client.json');
+		$schema = new RequestSchema('schema://requests/new_oauth_client.json');
 		$validator = new JqueryValidationAdapter($schema, $this->ci->translator);
 		$rules = $validator->rules('json', false);
 		$apps = OauthClients::where('user_id', '=' , $this->ci->currentUser->id)->get()->toArray();
-		return $this->ci->view->render($response, 'pages/oauth2_create_new_app.html.twig', [
+		return $this->ci->view->render($response, 'modals/oauth2/create_client.html.twig', [
 		'Apps' => $apps,
 		'page' => [
-			'validators' => [
-				'contact' => $rules
-			]
+			'validators' =>  $rules
 		]]);
 	}
 
+    public function getClients($request, $response, $args)
+	{
+        // GET parameters
+        $params = $request->getQueryParams();
+
+        /** @var UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
+
+        $sprunje = new ClientSprunje($classMapper, $params);
+
+        $sprunje->extendQuery(function ($query) {
+            return $query->where('user_id',$this->ci->currentUser->id);
+        });
+
+        return $sprunje->toResponse($response);
+    }
+
 	public function addNewClient($request, $response, $args)
 	{
-
 		$params = $request->getParsedBody();
 
 		// Load the request schema
@@ -284,11 +299,6 @@ class ApiAuthController extends SimpleController
 			while(OauthClients::where('public_id', '=' , $this->public_id)->first() != null)
 			{
 				$this->public_id = mt_rand(10000000, 99999999) . mt_rand(10000000, 99999999);
-				$this->public_id->exist = OauthClients::where('public_id', '=' , $this->public_id)->first();
-				if($this->public_id->exist = null)
-				{
-					break;
-				}
 			}
 		}
 
@@ -314,6 +324,7 @@ class ApiAuthController extends SimpleController
 				]);
 		$this->newClient->save();
 
+        return $response->withStatus(204);
 	}
 
 }

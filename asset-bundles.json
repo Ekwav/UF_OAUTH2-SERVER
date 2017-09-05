@@ -14,8 +14,20 @@
         },
 		"js/oauth2": {
             "scripts" : [
-                "local/api/js/oauth2-edit.js",
+                "oauth2/js/edit.js",
                 "local/api/bootstrap-toggle-master/js/bootstrap-toggle.min.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                }
+            }
+        },
+        "js/pages/clients": {
+            "scripts" : [
+                "oauth2/js/create.js"
             ],
             "options": {
                 "result": {

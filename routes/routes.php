@@ -11,12 +11,16 @@ $app->get('/finish_authorize', 'UserFrosting\Sprinkle\OAuth2Server\Controller\Ap
 
 //$app->get('/oauth2/change', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:oAuth2ChangeRequest');
 $app->get('/apps', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:renderClients')->add('authGuard');
-$app->get('/app/new', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:renderAddNewClient')->add('authGuard');
+$app->get('/modals/client/create', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:getModalCreateClient')->add('authGuard');
 //$app->get('/app/new/scope', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:newScope');
 
 $app->post('/authorize_vertify', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:validateAuthRequest')->add('authGuard');
-$app->post('/app/new', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:addNewClient')->add('authGuard');
 
+$app->group('/api', function () {
+    $this->get('/clients', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:getClients');
+
+    $this->post('/client/new', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:addNewClient');
+})->add('authGuard');
 $app->post('/oauth2/access_token', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:AccessToken');
 // This is a test api endpoint to try it :)
 // IMPORTANT! YOU NEED TO ADD ALL YOUR API ENDPOINTS TO THE CSRF.BLACKLIST IN YOUR config file

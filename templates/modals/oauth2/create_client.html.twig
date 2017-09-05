@@ -1,0 +1,44 @@
+{% extends "modals/modal.html.twig" %}
+
+{% block page_title %}{{translate("OAUTH2.CLIENT.NEW")}}{% endblock %}
+{% block page_description %}{{translate("OAUTH2.CLIENT.NEW.DESCRIPTION")}}{% endblock %}
+{% block stylesheets_page %}
+    <!-- Page-specific CSS asset bundle -->
+    {{ assets.css('css/form-widgets') | raw }}
+{% endblock %}
+{% block modal_body %}
+
+<div class="row">
+    <div class="col-lg-6">
+        <form id="account-settings" class="js-form" action="{{site.uri.public}}/api/client/new" method="post">
+            <div class="box-body">
+                {% include "forms/csrf.html.twig" %}
+                    <div class="form-group">
+                        <label for="input-name" class="ccontrol-label">{{translate("NAME")}} <button type="button" class="btn btn-link btn-xs" data-toggle="tooltip" title="{{translate('OAUTH2.CLIENT.NAME.HELP')}} "><i class="fa fa-info"></i></button></label>
+                        <input type="text" id="name" class="form-control" name="name" autocomplete="off" placeholder="{{translate("OAUTH2.CLIENT.NAME.EXAMPLE")}}" {{page.visibility}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-description" class="ccontrol-label">{{translate("DESCRIPTION")}} <button type="button" class="btn btn-link btn-xs" data-toggle="tooltip" title="{{translate('OAUTH2.CLIENT.DESCRIPTION.HELP')}} "><i class="fa fa-info"></i></button></label>
+        				<textarea type="text" id="description" class="form-control" name="description" autocomplete="off" placeholder="{{translate("OAUTH2.CLIENT.DESCRIPTION.EXAMPLE")}}" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-redirect" class="ccontrol-label">{{translate("OAUTH2.CLIENT.REDIRECT_URI")}} <button type="button" class="btn btn-link btn-xs" data-toggle="tooltip" title="{{translate('OAUTH2.CLIENT.REDIRECT_URI.HELP')}} "><i class="fa fa-info"></i></button></label>
+                        <input type="text" id="redirect" class="form-control" name="redirect" autocomplete="off" placeholder="{{translate("OAUTH2.CLIENT.REDIRECT_URI.EXAMPLE")}}" {{page.visibility}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-icon" class="ccontrol-label">{{translate("OAUTH2.CLIENT.ICON")}} <button type="button" class="btn btn-link btn-xs" data-toggle="tooltip" title="{{translate('OAUTH2.CLIENT.ICON.HELP')}} "><i class="fa fa-info"></i></button></label>
+                        <input type="text" id="icon" class="form-control" name="icon" autocomplete="off" placeholder="{{translate("OAUTH2.CLIENT.ICON.EXAMPLE")}}" {{page.visibility}}>
+                    </div>
+            </div>
+            <div class="box-footer text-center">
+                <button type="reset" class="btn btn-default">{{translate('RESET')}}</button>
+                <button type="submit" class="btn btn-primary js-submit">{{translate('SAVE')}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Include validation rules -->
+<script>
+    {% include "pages/partials/page.js.twig" %}
+</script>
+{% endblock %}

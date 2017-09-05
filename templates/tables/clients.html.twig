@@ -1,0 +1,77 @@
+{% extends "tables/table-paginated.html.twig" %}
+
+{% block table %}
+    <table id="client-table" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="{{table.sortlist}}">
+        <thead>
+            <tr>
+                <th class="sorter-metatext" data-column-name="name" data-column-template="#clients-table-column-name-id" data-priority="1">User info <i class="fa fa-sort"></i></th>
+                <th class="sorter-metanum" data-column-name="created_at" data-column-template="#clients-table-column-status" data-priority="1">Created at <i class="fa fa-sort"></i></th>
+                <th data-column-template="#clients-table-column-actions" data-sorter="false" data-filter="false" data-priority="1">{{translate("ACTIONS")}}</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block table_cell_templates %}
+
+    {% verbatim %}
+    <script id="clients-table-column-name-id" type="text/x-handlebars-template">
+        <td data-text="{{row.name}}">
+            <strong>
+                <a href="{{site.uri.public}}/clients/c/{{row.public_id}}">{{row.name}}</a>
+            </strong>
+            <div class=" js-copy-container">
+                <p>App ID: <span class="js-copy-target s-copy-trigger">{{row.public_id}}</span>
+                    <button class="btn btn-default js-copy-trigger" type="button"><i class="fa fa-clipboard"></i></button>
+                </p>
+            </div>
+            {{row.email}}
+        </td>
+    </script>
+
+    <script id="clients-table-column-status" type="text/x-handlebars-template">
+        {{#if row.created_at }}
+        <td data-num="{{dateFormat row.created_at format='x'}}">
+            {{dateFormat row.created_at format="dddd"}}<br>{{dateFormat row.created_at format="MMM Do, YYYY hh:mm"}}
+            <br>
+            <i>{{row.description}}</i>
+        </td>
+        {{ else }}
+        <td data-num="0">
+            <i>Unknown</i>
+        </td>
+        {{/if }}
+    </script>
+
+    <script id="clients-table-column-actions" type="text/x-handlebars-template">
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    {% endverbatim %}{{translate("ACTIONS")}}{% verbatim %}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li>
+                        <a href="#" data-public_id="{{row.public_id}}" class="js-client-edit">
+                        <i class="fa fa-edit"></i> {% endverbatim %}{{translate("CLIENT.EDIT")}}{% verbatim %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-public_id="{{row.public_id}}" class="js-client-display_secret">
+                        <i class="fa fa-trash-o"></i> {% endverbatim %}{{translate("CLIENT.DISPLAY_SECRET")}}{% verbatim %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-public_id="{{row.public_id}}" class="js-client-delete">
+                        <i class="fa fa-trash-o"></i> {% endverbatim %}{{translate("CLIENT.DELETE")}}{% verbatim %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </script>
+    {% endverbatim %}
+
+{% endblock %}

@@ -12,6 +12,10 @@ class OauthClients extends Model {
      */
     protected $table = "oauth_clients";
 
+    //protected $visible = ['public_id', 'secret'];
+
+    protected $hidden = ['id'];
+
     protected $fillable = [
         "user_id",
         "project_id",

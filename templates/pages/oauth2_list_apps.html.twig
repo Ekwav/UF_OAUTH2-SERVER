@@ -7,77 +7,38 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-body">
-						{% if Apps %}
-                        <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr role="row">
-                                <th>App name</th>
-                                <th>App status</th>
-                                <th>{{translate('ACTIONS')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for App in Apps %}
-                            <tr role="row">
-                                <td>
-                                    <strong>{{App.name}}</strong>
-									<div class=" js-copy-container">
-									 <p>App ID: <span class="js-copy-target s-copy-trigger">{{App.public_id}}</span>
-											<button class="btn btn-default js-copy-trigger" type="button"><i class="fa fa-clipboard"></i></button>
-									 </p>
-									</div>
-                                </td>
-                                <td nowrap="nowrap">
-                                    {% if App.revoked == "0" %}
-                                        <i>Active</i>
-                                    {% else %}
-                                        <i>Disabled</i>
-                                    {% endif %}
-                                </td>
-                                <td nowrap="nowrap">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                            {{translate('ACTIONS')}}
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                            <li>
-                                                <a href="#" class="disabled js-displayForm" data-toggle="modal" data-formUrl="/Apps/{{app.id}}/edit"><i class="fa fa-edit"></i> Edit (not yet)</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{site.uri.public}}/authorize/{{App.public_id}}/token/full_access"><i class="fa fa-user"></i> Optain a token</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="js-displayConfirm" data-confirm-title="Delete App" data-confirm-message="Are your sure you want to delete the App {{app.name}}" data-confirm-button="Yes, delete App" data-post-url="/Apps/{{app.id}}" data-post-method="DELETE" data-toggle="modal"><i class="fa fa-trash-o"></i> Delete</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                        </table>
-						{% else %}
-							<h2>Nothing here yet</h2>
-							<p>Klick the Button to create your first App</p>
-						{% endif %}
-                    </div><!-- /.box-body -->
-                    <div class="box-footer">
-                        <a href="{{site.uri.public}}/app/new"><button class="btn btn-success js-displayForm" data-toggle="modal" data-formUrl="/app/new"><i class="fa fa-plus-square"></i> Create App</button></a>
+                <div id="client-table-box" class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title pull-left"><i class="fa fa-fw fa-user"></i> Clients</h3>
+                        {% include "tables/table-tool-menu.html.twig" %}
                     </div>
-                </div><!-- /.box -->
+                    <div class="box-body">
+                        {% include "tables/clients.html.twig" with {
+                                "table" : {
+                                    "id" : "table-members"
+                                }
+                            }
+                        %}
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-success js-client-create">
+                            <i class="fa fa-plus-square"></i>  Create client
+                        </button>
+                    </div>
+                </div>
             </div><!-- /.col -->
         </div><!-- /.row -->
 {% endblock %}
 
 {% block scripts_page %}
-
-    <!-- Include page-specific JS -->
-
+    <!-- Include validation rules -->
     <script>
-        $(".js-displayForm").formGenerator();
-        $(".js-displayConfirm").formGenerator('confirm');
+    {% include "pages/partials/page.js.twig" %}
     </script>
+
+    <!-- Include form widgets JS -->
+    {{ assets.js('js/form-widgets') | raw }}
+    <!-- Include page-specific JS -->
+    {{ assets.js('js/pages/clients') | raw }}
+
 {% endblock %}

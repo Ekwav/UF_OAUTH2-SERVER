@@ -48,8 +48,7 @@ class ClientRepository implements ClientRepositoryInterface
         $client = new ClientEntity();
         $client->setIdentifier($clientIdentifier);
         $client->setName($this->clients->name);
-        $client->setRedirectUri($this->clients->redirect);
-        \UserFrosting\Sprinkle\Core\Facades\Debug::debug(print_r($client,true));
+        $client->setRedirectUri($this->clients->redirect);;
         return $client;
     }
 }
