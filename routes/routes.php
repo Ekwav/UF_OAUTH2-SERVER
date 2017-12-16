@@ -4,6 +4,7 @@ use League\OAuth2\Server\Middleware\ResourceServerMiddleware;
 
 
 $app->get('/authorize/{client_id}/{response_type}/{scope}', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:authorizePage')->add('authGuard');
+$app->get('/authorize/{client_id}/{response_type}/{scope}/{state}', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:authorizePage')->add('authGuard');
 $app->get('/oauth', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:authorizePage')->add('authGuard');
 $app->get('/finish_authorize', 'UserFrosting\Sprinkle\OAuth2Server\Controller\ApiAuthController:finish_authorize')->add('authGuard');
 

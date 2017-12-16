@@ -137,6 +137,9 @@ class ApiAuthController extends SimpleController
 		// Ok, looks like everything is fine with these scopes so we will save them in the session.
 		$session['scopes'] = $scopes;
 
+        // The oauth2 flow implements a session, throughout the user validation this woudl get lost
+        // so we store it in the session to send it back when we are done.
+        $session['state'] = $request->getQueryParams()['state'];
 
 		// nothing went wrong yet? Let's create the actuall OAuth2 object request and store it in the Session
 		$session['auth_request'] = $this->ci->OAuth2->validateAuthorizationRequest($request);
@@ -177,7 +180,10 @@ class ApiAuthController extends SimpleController
 
 		// Build the redirect route to finish the authorization Grant, it only accepts GET :/
 		// I belive that it is a security hole like I reported here: https://github.com/thephpleague/oauth2-server/issues/730
-		$route = $this->ci->config['site.uri.public'] . "/finish_authorize?response_type=" . $params['response_type'] . "&scope=" . $params['scope'] . "&client_id=" . $params['client_id'];
+		$route = $this->ci->config['site.uri.public'] . "/finish_authorize?response_type=" . $params['response_type'] .
+        $route .= "&scope=" . $params['scope'];
+        $route .= "&client_id=" . $params['client_id'];
+        $route .= "&state=" . $session['state'];
 
 		return $response->withRedirect($route);
 	}
@@ -186,49 +192,49 @@ class ApiAuthController extends SimpleController
   // This is an example Controller how to get user information with a token
 	public function getUserInfo($request, $response, $args)
 	{
-    // First of all we get the user id and the scopes
+        // First of all we get the user id and the scopes
 		$scopes = $request->getAttribute('oauth_scopes', []);
 		$user_id = $request->getAttribute('oauth_user_id', []);
 
-    // Now we will query the database with the user id
+        // Now we will query the database with the user id
 		$user = User::where('id',  $user_id)->first();
 
-    // No matter what specified by the user we will always return his id.
+        // No matter what specified by the user we will always return his id.
 		$information["user_id"] = $user_id;
 
-    // If the user activated basic, we return user_name and his locale
+        // If the user activated basic, we return user_name and his locale
 		if (in_array('basic', $scopes)) {
-		$information["user_name"] = $user->user_name;
-		$information["locale"] = $user->locale;
+    		$information["user_name"] = $user->user_name;
+    		$information["locale"] = $user->locale;
 		}
 		if (in_array('email', $scopes)) {
-		$information["email"] = $user->email;
+    		$information["email"] = $user->email;
 		}
-    // If the user granted full_access, we return everything we have
-    // or want, we shouldn't give out the password even if its encrypted.
-    if (in_array('full_access', $scopes)){
-		$information["user_name"] = $user->user_name;
-		$information["locale"] = $user->locale;
-    $information["email"] = $user->email;
+        // If the user granted full_access, we return everything we have
+        // or want, we shouldn't give out the password even if its encrypted.
+        if (in_array('full_access', $scopes)){
+    		$information["user_name"] = $user->user_name;
+    		$information["locale"] = $user->locale;
+            $information["email"] = $user->email;
 		}
 		return $response->withJson($information);
 	}
 
 
-  public function AccessToken($request, $response, $args)
-  {
-    $client_id = $request->getParsedBody()['client_id'];
-    $this->ci->session['CLIENT'] = OauthClients::where('public_id', '=' , $client_id)->first();
-    $server = $this->ci->OAuth2;
-    try {
-        return $server->respondToAccessTokenRequest($request, $response);
-    } catch (OAuthServerException $exception) {
-        return $exception->generateHttpResponse($response);
-    } catch (\Exception $exception) {
-        $response->getBody()->write($exception->getMessage());
-        return $response->withStatus(500);
+    public function AccessToken($request, $response, $args)
+    {
+        $client_id = $request->getParsedBody()['client_id'];
+        $this->ci->session['CLIENT'] = OauthClients::where('public_id', '=' , $client_id)->first();
+        $server = $this->ci->OAuth2;
+        try {
+            return $server->respondToAccessTokenRequest($request, $response);
+        } catch (OAuthServerException $exception) {
+            return $exception->generateHttpResponse($response);
+        } catch (\Exception $exception) {
+            $response->getBody()->write($exception->getMessage());
+            return $response->withStatus(500);
+        }
     }
-  }
 
 
 	public function renderClients($request, $response, $args)
