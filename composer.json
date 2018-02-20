@@ -4,7 +4,6 @@
     "description": "OAuth2 Api module for UserFrosting.",
     "keywords": ["OAuth2", "Server", "userfrosting"],
     "homepage": "https://github.com/Ekwav/UF_OAUTH2-SERVER",
-    "license" : "",
     "authors" : [
         {
             "name": "Äkwav",
